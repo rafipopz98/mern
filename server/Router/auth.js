@@ -7,25 +7,57 @@ const User = require("../models/user");
 router.get("/", (req, res) => {
   res.send("hello world");
 });
-router.post("/register", (req, res) => {
+
+// using promisses
+
+// router.post("/register", (req, res) => {
+//   const { name, email, phone, work, password, cpassword } = req.body;
+
+//   if (!name || !email || !phone || !work || !password || !cpassword) {
+//     return res.status(500).json({ error: "cannot be empty" });
+//   }
+
+//   User.findOne({email:email}).then((userExist)=>{
+//     if(userExist){
+//         return res.status(500).json({error:'user already exist'})
+//     }
+//     const user=new User({name, email, phone, work, password, cpassword })
+
+//     user.save().then(()=>{
+//         res.status(200).json({message:'sucessfulll'})
+//     }).catch((err)=>{
+//         res.status(501).json({error:'there seems to be a problem with database',err})
+//     })
+//   }).catch((err)=>{console.log("the error is ",err)})
+
+// });
+
+// using async,await
+
+router.post("/register", async (req, res) => {
   const { name, email, phone, work, password, cpassword } = req.body;
 
   if (!name || !email || !phone || !work || !password || !cpassword) {
     return res.status(500).json({ error: "cannot be empty" });
   }
 
-  User.findOne({email:email}).then((userExist)=>{
-    if(userExist){
-        return res.status(500).json({error:'user already exist'})
-    }
-    const user=new User({name, email, phone, work, password, cpassword })
+  try {
+    const userExist = await User.findOne({ email: email });
 
-    user.save().then(()=>{
-        res.status(200).json({message:'sucessfulll'})
-    }).catch((err)=>{
-        res.status(501).json({error:'there seems to be a problem with database',err})
-    })
-  }).catch((err)=>{console.log("the error is ",err)})
-  
+    if (userExist) {
+      return res.status(500).json({ error: "user already exist" });
+    }
+
+    const user = new User({ name, email, phone, work, password, cpassword });
+
+    const saved = await user.save();
+    {saved?res.status(200).json({msg:"success"}):res.status(500).json({err:"error"})}
+  } catch (err) {
+    console.log("the err is ", err);
+  }
+
+
+  console.log(name,work)
 });
+
 module.exports = router;
