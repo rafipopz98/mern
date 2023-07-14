@@ -7,6 +7,8 @@ dotenv.config({
   path: './config.env',
 });
 require("./db/conection");
+// const User=require('./models/model')
+
 
 
 const PORT = process.env.PORT;
