@@ -7,9 +7,12 @@ dotenv.config({
   path: './config.env',
 });
 require("./db/conection");
+
 // const User=require('./models/model')
 
+app.use(express.json())
 
+app.use(require('./Router/auth'))
 
 const PORT = process.env.PORT;
 
@@ -20,21 +23,7 @@ const PORT = process.env.PORT;
 //     next()
 // }
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-app.get("/about", (req, res) => {
-  res.send("hello world from about");
-});
-app.get("/contact", (req, res) => {
-  res.send("hello world from contact");
-});
-app.get("/signin", (req, res) => {
-  res.send("hello world from sign in");
-});
-app.get("/signup", (req, res) => {
-  res.send("hello world from signup");
-});
+
 
 app.listen(PORT, () => {
   console.log(`server is runningon port ${PORT}`);
