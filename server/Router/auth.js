@@ -50,14 +50,35 @@ router.post("/register", async (req, res) => {
 
     const user = new User({ name, email, phone, work, password, cpassword });
 
-    const saved = await user.save();
-    {saved?res.status(200).json({msg:"success"}):res.status(500).json({err:"error"})}
+    const save = await user.save();
+    {
+      save
+        ? res.status(200).json({ msg: "success" })
+        : res.status(500).json({ err: "error" });
+    }
   } catch (err) {
     console.log("the err is ", err);
   }
+});
 
+// signin
 
-  console.log(name,work)
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(500).json({ err: "cannot be empty" });
+  } 
+  try{
+  
+   const userExist = await User.findOne({ email: email });
+    {
+      userExist
+        ? res.status(200).json({ msg: "succesfully logged in" })
+        : res.status(500).json({ err: "error" });
+    }
+}catch(err){
+  console.log(err)
+}
 });
 
 module.exports = router;
