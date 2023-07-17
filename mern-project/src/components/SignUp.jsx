@@ -3,6 +3,7 @@ import React from 'react'
 const SignUp = () => {
   return (
     <div>
+    
       name <input type="text" />
       email<input type="password" />
       password<input type="password" />
