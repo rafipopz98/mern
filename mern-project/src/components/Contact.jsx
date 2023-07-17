@@ -4,7 +4,6 @@ const Contact = () => {
   return (
     <div>
       <form >
-        input
       </form>
     </div>
   )
