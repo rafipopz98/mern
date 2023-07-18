@@ -10,7 +10,7 @@ const SignUp = () => {
       password<input type="password" />
       cpassword<input type="password" />
       phone<input type="number" />
-      <input type="submit" value="sign up" />
+      <input type="submit" value="signup" />
     </form>
     </div>
   )
