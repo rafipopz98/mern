@@ -2,7 +2,19 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div>About</div>
+    <div>
+    photo
+      name:name
+      age:age
+      id:id
+      date joined
+      email
+      phone
+      work
+      {/* gvhbjnkml */}
+      timeline
+
+    </div>
   )
 }
 
