@@ -9,21 +9,27 @@ const SignUp = () => {
     cpassword: "",
     phone: ""
   });
+  let name,value;
+
   const Inputhandler=(e)=>{
-    console.log(e)
+    name=e.target.name;
+    value=e.target.value;
+    setUser({
+      ...user,[name]:value
+    })
   }
   return (
     <div>
       <form>
-        name <input type="text" value={user.name}  onChange={Inputhandler}/>
+        name <input type="text"  name="name" value={user.name}  onChange={Inputhandler}/>
         email
-        <input type="password" value={user.email}  onChange={Inputhandler}/>
+        <input type="password" name="email" value={user.email}  onChange={Inputhandler}/>
         password
-        <input type="password" value={user.password}  onChange={Inputhandler}/>
+        <input type="password" name="password" value={user.password}  onChange={Inputhandler}/>
         cpassword
-        <input type="password" value={user.cpassword}  onChange={Inputhandler}/>
+        <input type="password" name="cpassword" value={user.cpassword}  onChange={Inputhandler}/>
         phone
-        <input type="number" value={user.phone}  onChange={Inputhandler}/>
+        <input type="number" name="phone" value={user.phone}  onChange={Inputhandler}/>
         <input type="submit" value="signup" />
       </form>
     </div>
