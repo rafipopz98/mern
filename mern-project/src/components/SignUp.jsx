@@ -1,63 +1,38 @@
-import React from "react";
-// import {useHistory} from 'react-router-dom'
-import { useState } from "react";
+import React from 'react'
+import { useState } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const SignUp = () => {
-  // const history=useHistory()
-  const [user, setUser] = useState({
-    name: "",
-    email : "",
-    password: "",
-    cpassword: "",
-    phone: ""
-  });
-  let name,value;
 
-  const inputHandler=(e)=>{
-    name=e.target.name;
-    value=e.target.value;
-    setUser({
-      ...user,[name]:value
-    })
-  }
+  const [email,setEmail]=useState()
+  const [passowrd,setPassword]=useState()
 
-  const submitt=async(e)=>{
+  const  submit=async(e)=>{
     e.preventDefault();
-    const {name,email,password,cpassword,phone}=user;
 
-    const res=await fetch('/register',{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        name,email,password,cpassword,phone
+    try{
+
+      await axios.post("http://localhost:8000/signup",{
+        email,passowrd
       })
-    })
 
-    const data=res.json()
-    if(data.status===422||!data){
-      window.alert("errrorrrr")
-    }else{
-      window.alert("sucesss")
+    }catch(e){
+      console.log("the error is ",e)
     }
-    // history.push('/login')
   }
+  
   return (
+    
     <div>
-      <form action="POST">
-        name <input required type="text"  name="name" value={user.name}  onChange={inputHandler}/>
-        email
-        <input required type="email" name="email" value={user.email}  onChange={inputHandler}/>
-        password
-        <input required type="password" name="password" value={user.password}  onChange={inputHandler}/>
-        cpassword
-        <input required type="password" name="cpassword" value={user.cpassword}  onChange={inputHandler}/>
-        phonek
-        <input type="number" name="phone" value={user.phone} required  onChange={inputHandler}/>
-        <input required type="submit" value="register" onClick={submitt}/>
-      </form>
+    <form action='POST'>
+      email: <input type="email"  onChange={(e)=>{setEmail(e.target.value)}} placeholder='email'/>
+      passowrd: <input type="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='email'/>
+      <input type="submit" onClick={submit}/>
+    </form>
+    <Link to='/login'>Login</Link>
     </div>
-  );
-};
-export default SignUp;
+  )
+}
+
+export default SignUp
