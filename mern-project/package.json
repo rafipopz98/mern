@@ -1,7 +1,7 @@
 {
   "name": "mern-project",
   "private": true,
-  "proxy":"http://localhost:8000",
+  "proxy": "http://localhost:8000",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "gsap": "^3.12.2",
     "react": "^18.2.0",
