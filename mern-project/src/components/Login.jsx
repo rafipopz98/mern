@@ -8,14 +8,16 @@ const Login = () => {
   const [email,setEmail]=useState()
   const [passowrd,setPassword]=useState()
 
-  const  submit=async(e)=>{
+  const  submit= async (e)=>{
     e.preventDefault();
 
     try{
 
       await axios.post("http://localhost:8000/login",{
-        email,passowrd
-      })
+        email,passowrd 
+
+
+      }) 
 
     }catch(e){
       console.log("the error is ",e)
