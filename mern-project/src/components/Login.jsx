@@ -14,9 +14,7 @@ const Login = () => {
     try{
 
       await axios.post("http://localhost:8000/login",{
-        email,passowrd 
-
-
+        email,passowrd
       }) 
 
     }catch(e){
